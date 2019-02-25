@@ -4,6 +4,7 @@
   padding: 1em;
   width: 70%;
   position: relative;
+  box-sizing: border-box;
 }
 .Chat-container > .title {
   display: flex;
@@ -56,4 +57,25 @@
   border-top-right-radius: 7px;
   border-bottom-right-radius: 7px;
   cursor: pointer;
+}
+@media screen and (max-width: 865px) {
+  .Chat-container > .chat > .input-chat > button {
+    font-size: 0.9em;
+    width: 15%;
+  }
+  .Chat-container > .chat > .input-chat > input {
+    width: 84%;
+  }
+}
+@media screen and (max-width: 590px) {
+  .Chat-container { width: 100%; }
+}
+@media screen and (max-width: 435px) {
+  .Chat-container > .chat > .input-chat > button {
+    width: 20%;
+    padding: 0.5em 0em;
+  }
+  .Chat-container {
+    padding: 1em 0.2em 1em 0.5em;
+  }
 }

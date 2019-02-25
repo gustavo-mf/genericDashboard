@@ -12,11 +12,22 @@
   width: 10%;
   margin-right: 1em;
 }
+.messages >  .message.reverse > .portrait { 
+  margin-right: 0;
+  margin-left: 1em; 
+}
 .messages >  .message > .portrait > img {
   border-radius: 50%;
   width: 100%;
   max-width: 80px;
   height: 80px;
+}
+.messages >  .message > .portrait > .userAvatar {
+  border-radius: 50%;
+  width: 100%;
+  max-width: 80px;
+  height: 80px;
+  background-color: orange;
 }
 .messages >  .message > .content { width: 90%; }
 .messages >  .message > .content div > span:nth-of-type(1) { 
@@ -30,4 +41,24 @@
 .messages >  .message > .content > p { 
   margin: 0; 
   color: #00000091;
+}
+@media screen and (max-width: 998px) {
+  .messages > .message > .portrait > img, .messages >  .message > .portrait > .userAvatar {
+    max-width: 60px;
+    height: 60px;
+  }
+}
+@media screen and (max-width: 715px) {
+  .messages >  .message > .content > p { 
+    font-size: 0.9em;
+  }
+}
+@media screen and (max-width: 435px) {
+  .messages > .message > .portrait > img, .messages >  .message > .portrait > .userAvatar {
+    max-width: 50px;
+    height: 50px;
+  }
+  .messages > .message.reverse > .portrait {
+    margin-left: 0.2;
+  }
 }
