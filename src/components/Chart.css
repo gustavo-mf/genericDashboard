@@ -1,0 +1,17 @@
+.Chart-container {
+  background-color: #fff;
+  margin-top: 1em;
+}
+.Chart-container > .title {
+  padding: 1em;
+  border-bottom: 1px solid #ccc;
+}
+.Chart-container > .title > h2 {
+  margin: 0;
+  font-size: 1.2em;
+  font-weight: normal;
+  color: #00000091;
+}
+.Chart-container > .chart {
+  margin-top: 1em;
+}

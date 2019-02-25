@@ -1,0 +1,14 @@
+.dashboard-container {
+    background-color: #cccccc3b;
+    width: 100%;
+    height: 100vh;
+    padding: 1em;
+    box-sizing: border-box;
+}
+.page-title {
+    font-size: 2em;
+    font-weight: normal;
+    margin: 0;
+    margin-bottom: 0.5em;
+    color: #00000091;
+}
