@@ -8,65 +8,39 @@ export default class Chart extends Component {
     pageViews: [
       { 
         month: 'Janeiro', 
-        value: 100
+        views: 100
       }, 
       { 
         month: 'Fevereiro',
-        value: 200
+        views: 200
       },
       { 
         month: 'Março',
-        value: 150
+        views: 150
       },
       { 
         month: 'Abril',
-        value: 400
+        views: 400
       },
       { 
         month: 'Maio',
-        value: 300
+        views: 300
       },
       { 
         month: 'junho',
-        value: 250
+        views: 250
       }
     ]
   };
   async componentWillMount() {
     await api.get('pageViews').then((res) => {
-      console.log('deu');
+      if(res.status === 200 && res.data.length > 0) {
+        this.setState({ pageViews: res.data});
+      }
       this.setState({ pageViews: res.data});
     }).catch((res) => {
       console.log('Erro na requisição pageViews');
-      console.log(res);
-      this.setState({
-        pageViews: [
-          { 
-            month: 'Janeiro', 
-            views: 300
-          }, 
-          { 
-            month: 'Fevereiro',
-            views: 400
-          },
-          { 
-            month: 'Março',
-            views: 150
-          },
-          { 
-            month: 'Abril',
-            views: 200
-          },
-          { 
-            month: 'Maio',
-            views: 100
-          },
-          { 
-            month: 'junho',
-            views: 550
-          }
-        ]
-      });   
+      console.log(res);   
     });
   }
   render() {

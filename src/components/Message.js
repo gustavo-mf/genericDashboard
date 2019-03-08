@@ -16,7 +16,7 @@ export default class Message extends Component {
         <div className="portrait">
           {message.userName === "Eu"? 
             <div className="userAvatar"></div>
-          :<img src={message.img?message.img:"https://picsum.photos/300/300?image=1062"} alt="Avatar"/>}
+          :<img src={message.portrait} alt="Avatar"/>}
         </div>
         <div className="content">
           <div>

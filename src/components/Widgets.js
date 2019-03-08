@@ -11,8 +11,9 @@ export default class Widgets extends Component {
   };
   async componentWillMount() {
     await api.get('widgets').then((res) => {
-      console.log('deu');
-      this.setState({res});
+      if(res.status === 200) {
+        this.setState(res.data);
+      }
     }).catch((res) => {
       console.log('Erro na requisição widgets');
       console.log(res);

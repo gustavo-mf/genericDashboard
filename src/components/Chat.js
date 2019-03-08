@@ -9,7 +9,7 @@ export default class Chat extends Component {
       {
         id: 0,
         userName: "John Doe",
-        portrait: 'https://dev.4all.com:3050/imgs/profile.jpg',
+        portrait: 'https://picsum.photos/300/300?image=1062',
         message: "orem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ac commodo lorem. Aliquam tortor metus, porta vel ultrices vel, semper id lorem. Sed suscipit tortor lorem, vitae accumsan velit ullamcorper sed. Praesent quam lectus, volutpat sodales malesuada id, interdum non augue.",
         displayPortraitLeft: true,
         time: "32 mins ago"
@@ -17,7 +17,7 @@ export default class Chat extends Component {
       {
         id: 1,
         userName: "John Doe",
-        portrait: 'https://dev.4all.com:3050/imgs/profile.jpg',
+        portrait: 'https://picsum.photos/300/300?image=1062',
         message: "orem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ac commodo lorem. Aliquam tortor metus, porta vel ultrices vel, semper id lorem. Sed suscipit tortor lorem, vitae accumsan velit ullamcorper sed. Praesent quam lectus, volutpat sodales malesuada id, interdum non augue.",
         displayPortraitLeft: false,
         time: "28 mins ago"
@@ -25,7 +25,7 @@ export default class Chat extends Component {
       {
         id: 2,
         userName: "John Doe",
-        portrait: 'https://dev.4all.com:3050/imgs/profile.jpg',
+        portrait: 'https://picsum.photos/300/300?image=1062',
         message: "orem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ac commodo lorem. Aliquam tortor metus, porta vel ultrices vel, semper id lorem. Sed suscipit tortor lorem, vitae accumsan velit ullamcorper sed. Praesent quam lectus, volutpat sodales malesuada id, interdum non augue.",
         displayPortraitLeft: true,
         time: "10 mins ago"
@@ -34,40 +34,13 @@ export default class Chat extends Component {
     userMessage: ''
   };
   async componentWillMount() {
-    await api.get('messages.').then((res) => {
-      console.log('deu');
-      this.setState({ messages: res});
+    await api.get('messages').then((res) => {
+      if(res.status === 200 && res.data.length > 0) {
+        this.setState({ messages: res.data });
+      }
     }).catch((res) => {
       console.log('Erro na requisição messages');
-      console.log(res);
-      this.setState({
-        messages: [
-          {
-            id: 0,
-            userName: "John Doe",
-            portrait: 'https://dev.4all.com:3050/imgs/profile.jpg',
-            message: "orem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ac commodo lorem. Aliquam tortor metus, porta vel ultrices vel, semper id lorem. Sed suscipit tortor lorem, vitae accumsan velit ullamcorper sed. Praesent quam lectus, volutpat sodales malesuada id, interdum non augue.",
-            displayPortraitLeft: false,
-            time: "32 mins ago"
-          },
-          {
-            id: 1,
-            userName: "John Doe",
-            portrait: 'https://dev.4all.com:3050/imgs/profile.jpg',
-            message: "orem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ac commodo lorem. Aliquam tortor metus, porta vel ultrices vel, semper id lorem. Sed suscipit tortor lorem, vitae accumsan velit ullamcorper sed. Praesent quam lectus, volutpat sodales malesuada id, interdum non augue.",
-            displayPortraitLeft: true,
-            time: "28 mins ago"
-          },
-          {
-            id: 2,
-            userName: "John Doe",
-            portrait: 'https://dev.4all.com:3050/imgs/profile.jpg',
-            message: "orem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ac commodo lorem. Aliquam tortor metus, porta vel ultrices vel, semper id lorem. Sed suscipit tortor lorem, vitae accumsan velit ullamcorper sed. Praesent quam lectus, volutpat sodales malesuada id, interdum non augue.",
-            displayPortraitLeft: false,
-            time: "10 mins ago"
-          }
-        ]
-      });  
+      console.log(res);  
     });
   }
   componentDidUpdate() {
@@ -85,12 +58,16 @@ export default class Chat extends Component {
       userName: "Eu",
       portrait: '',
       message: message,
-      displayPortraitLeft: (id < 1 ? true: !messages[id-1].displayPortraitLeft),
+      displayPortraitLeft: true,
       time: "1 min ago",
     });
     this.setState({ userMessage: '', messages });
     document.querySelector('.messages').scrollTo(0, 1000);
-    await api.post('message', { message });
+    await api.post('messages', { message }).then((res) => {
+      if(res.status === 201) {
+        console.log('menssagem enviada.');
+      }
+    });
   };
   render() {
     return (
@@ -101,8 +78,8 @@ export default class Chat extends Component {
         </div>
         <div className="chat">
           <div className="messages">
-          { this.state.messages.map(message => (
-            <Message key={message.id} message={message}/>
+          { this.state.messages.map((message, index) => (
+            <Message key={index} message={message}/>
           ))}
           </div>
           <div className="input-chat">
