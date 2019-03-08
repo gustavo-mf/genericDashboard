@@ -35,7 +35,7 @@ export default class Chart extends Component {
   async componentWillMount() {
     await api.get('pageViews').then((res) => {
       console.log('deu');
-      this.setState({ pageViews: res});
+      this.setState({ pageViews: res.data});
     }).catch((res) => {
       console.log('Erro na requisição pageViews');
       console.log(res);
@@ -43,27 +43,27 @@ export default class Chart extends Component {
         pageViews: [
           { 
             month: 'Janeiro', 
-            value: 300
+            views: 300
           }, 
           { 
             month: 'Fevereiro',
-            value: 400
+            views: 400
           },
           { 
             month: 'Março',
-            value: 150
+            views: 150
           },
           { 
             month: 'Abril',
-            value: 200
+            views: 200
           },
           { 
             month: 'Maio',
-            value: 100
+            views: 100
           },
           { 
             month: 'junho',
-            value: 550
+            views: 550
           }
         ]
       });   
@@ -77,7 +77,7 @@ export default class Chart extends Component {
         </div>
         <ResponsiveContainer className="chart" width='100%' height={300}>
           <LineChart data={this.state.pageViews}  margin={{top: 5, right: 50, left: 20, bottom: 5}}>
-            <Line type="monotone" dataKey="value" stroke="#8884d8" />
+            <Line type="monotone" dataKey="views" stroke="#8884d8" />
             <CartesianGrid stroke="#ccc" />
             <XAxis dataKey="month" />
             <YAxis />
